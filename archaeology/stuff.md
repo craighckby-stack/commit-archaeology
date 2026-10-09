@@ -152,3 +152,68 @@ _No high-recovery churn files currently warranting immediate vector indexing pri
 - **Dependency Isolation**: The symbolic_functionals project shows a lesson learned about dependency defaults, with [72ffe35f] explicitly reverting to previous parameter values to maintain result consistency across library versions.
 
 - **Regular Model Deployment Pipeline**: The epi_forecasts project demonstrates a consistent pattern of model output updates, suggesting an established deployment pipeline for regular model updates across multiple variants.
+
+---
+
+## Appended Analysis Stream (2026-10-09 13:30:21)
+
+## Deterministic patterns
+
+**Most-touched files (Architectural hotspots):**
+- `Uboreshaji_Modeli/trainers/detection.py` — 9 commits
+- `Uboreshaji_Modeli/engines/owl.py` — 9 commits
+- `Uboreshaji_Modeli/main.py` — 6 commits
+- `Uboreshaji_Modeli/common/config.py` — 6 commits
+- `Uboreshaji_Modeli/common/data.py` — 4 commits
+
+**Files with iterative wrong->correct cycles (Hard-won lessons):**
+- No recorded failure cycles detected in this corpus.
+
+**Recurring themes in commit subjects (sampled across 126 total commits, deduplicated per commit):**
+- `piperorigin` — 106 commits (84% of total corpus)
+- `revid` — 106 commits (84% of total corpus)
+- `tested` — 9 commits (7% of total corpus)
+- `ensuring` — 3 commits (2% of total corpus)
+- `adds` — 3 commits (2% of total corpus)
+- `transforms` — 3 commits (2% of total corpus)
+- `serialization` — 3 commits (2% of total corpus)
+- `failures` — 2 commits (2% of total corpus)
+
+### 🎯 Semantic Retrieval & Embedding Priority Index (Vector Targets)
+> High-churn / high-recovery files prioritized for vector embedding. These files yield the highest ROI for "have I broken this before" similarity queries.
+
+_No high-recovery churn files currently warranting immediate vector indexing priority._
+
+---
+
+## LLM-surfaced patterns (GLM)
+
+**Architectural Hotspots and Recurring Patterns**
+
+- **Uboreshaji_Modeli** appears to be a central architectural hub with consistent development activity across multiple components including engines, trainers, and common utilities. The project shows focused serialization safety improvements for various model transforms (Gemma Text, Vision, OWL-v2, MMS, Whisper) between commits [58cf0791] and [fb2ef0de].
+
+- **Epi_forecasts** demonstrates a pattern of regular model output updates with consistent file naming conventions across multiple model variants (Google_SAI-Adapted_1 through Google_SAI-Adapted_13), suggesting a systematic deployment or evaluation process.
+
+- **PySCF integration** in `symbolic_functionals/syfes` shows careful version management to maintain compatibility with changing default parameters, specifically the `small_rho_cutoff` value in commit [72ffe35f].
+
+- **SCANN** project shows focused development on core search infrastructure with commits targeting internal optimization components like `hwy-compact.cc` ([ff4d1a67], [fe47f185]) and `highway.h` ([5594ac0e]).
+
+**Skill Growth and Evolution**
+
+- **Serialization handling** demonstrates maturation across the codebase, starting with basic pickling support in Gemma Text transforms ([e1e8d868]) and evolving to comprehensive serialization safety across multiple model types with custom `__getstate__`/`__setstate__` hooks ([58cf0791]).
+
+- **Configuration management** in Uboreshaji_Modeli shows progression from basic config files ([41870386]) to more sophisticated configuration utilities with dedicated config modules and test suites ([bfe52db2], [6c705bb0]).
+
+- **Testing infrastructure** appears to have expanded from isolated test files ([c1c0c1a5]) to comprehensive test suites covering multiple components including audio utilities, losses, metrics, and trainers ([d84ee86c]).
+
+**Key Architectural Decisions and Lessons**
+
+- **Modular engine architecture** in Uboreshaji_Modeli with separate engine implementations for different modalities (text, vision, audio) and a factory pattern for engine selection ([fcfb1161], [2ae3d11e]).
+
+- **Explicit serialization boundaries** were implemented to prevent masking of unexpected failures during model exports, ensuring more reliable checkpoint saving ([5a9b7231]).
+
+- **Dependency version management** demonstrated in PySCF integration where the team proactively adjusted to breaking changes in default parameters to maintain consistent results ([72ffe35f]).
+
+- **Standardized model output naming conventions** in epi_forecasts project, suggesting architectural decisions around model versioning and deployment tracking.
+
+- **Careful exception handling** during final model exports to prevent masking of unexpected failures, indicating a learned lesson about error visibility in critical workflows ([5a9b7231]).
