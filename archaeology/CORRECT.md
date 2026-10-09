@@ -333,3 +333,58 @@ index e3b55ef..3d69ff8 100644
    modelUsed: string;
 ```
 
+---
+
+<!-- CAE Append Session: 2026-10-09T04:39:18.992Z -->
+
+## Wed, 26 Aug 2026 16:22:34 -0700 -- Includes <cmath> in distributions.cc and unfair-prophet.cc to fix compilation (`5d8f4ac9`)
+
+**Pair ID:** 5d8f4ac9
+
+**Author:** Unknown
+
+**Files touched:**
+- `fairness_and_bias_in_online_selection/distributions.cc`
+- `fairness_and_bias_in_online_selection/unfair-prophet.cc`
+
+**Commit message:**
+```
+Includes <cmath> in distributions.cc and unfair-prophet.cc to fix compilation
+```
+
+**Diff:**
+```diff
+under llvm-unstable where pow is used.
+
+PiperOrigin-RevId: 971564836
+---
+ fairness_and_bias_in_online_selection/distributions.cc  | 2 ++
+ fairness_and_bias_in_online_selection/unfair-prophet.cc | 2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/fairness_and_bias_in_online_selection/distributions.cc b/fairness_and_bias_in_online_selection/distributions.cc
+index 4ec1d0a2d68..7526ff9d7df 100644
+--- a/fairness_and_bias_in_online_selection/distributions.cc
++++ b/fairness_and_bias_in_online_selection/distributions.cc
+@@ -14,6 +14,8 @@
+ 
+ #include "distributions.h"
+ 
++#include <cmath>
++
+ namespace fair_secretary {
+ 
+ using std::vector;
+diff --git a/fairness_and_bias_in_online_selection/unfair-prophet.cc b/fairness_and_bias_in_online_selection/unfair-prophet.cc
+index 97e4cfc6877..e03a8cb5086 100644
+--- a/fairness_and_bias_in_online_selection/unfair-prophet.cc
++++ b/fairness_and_bias_in_online_selection/unfair-prophet.cc
+@@ -13,6 +13,8 @@
+ // limitations under the License.
+ 
+ #include "unfair-prophet.h"
++
++#include <cmath>
+ #include <functional>
+ namespace fair_secretary {
+```
